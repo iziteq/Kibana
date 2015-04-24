@@ -15,7 +15,8 @@ class KibanaApp < Sinatra::Base
 	if KibanaConfig::Allow_iframed
       set :protection, :except => :frame_options
     end
-    enable :sessions
+    use Rack::Session::Cookie, :key => KibanaConfig::SharedSessionKey,
+                               :secret => KibanaConfig::SharedSessionSecret
   end
 
   helpers do
